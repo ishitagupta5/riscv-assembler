@@ -1,0 +1,833 @@
+State 0 conflicts: 9 shift/reduce
+State 11 conflicts: 9 shift/reduce, 1 reduce/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: segments
+
+    2 segments: segments segment
+    3         | segment
+
+    4 segment: %empty
+    5        | text
+
+    6 text: text NEWLINE instruction
+    7     | instruction
+
+    8 instruction: r-type
+
+    9 r-type: add
+   10       | sub
+
+   11 add: ADD REGISTER COMMA REGISTER COMMA REGISTER
+
+   12 sub: SUB REGISTER COMMA REGISTER COMMA REGISTER
+
+   13 instruction: i-type
+
+   14 i-type: addi
+   15       | slli
+   16       | lw
+
+   17 addi: ADDI REGISTER COMMA REGISTER COMMA imm
+
+   18 slli: SLLI REGISTER COMMA REGISTER COMMA imm
+
+   19 lw: LW REGISTER COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+   20 instruction: s-type
+
+   21 s-type: sw
+
+   22 sw: SW REGISTER COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+   23 instruction: ui-type
+
+   24 ui-type: auipc
+
+   25 auipc: AUIPC REGISTER COMMA imm
+
+   26 instruction: b-type
+
+   27 b-type: beq
+
+   28 beq: BEQ REGISTER COMMA REGISTER COMMA imm
+
+   29 instruction: j-type
+
+   30 j-type: j
+
+   31 j: J imm
+
+   32 imm: MINUS IMMEDIATE
+   33    | IMMEDIATE
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    REGISTER <l> (258) 11 12 17 18 19 22 25 28
+    NEWLINE <l> (259) 6
+    COMMA <l> (260) 11 12 17 18 19 22 25 28
+    LEFT_PAREN <l> (261) 19 22
+    RIGHT_PAREN <l> (262) 19 22
+    MINUS <l> (263) 32
+    IMMEDIATE <l> (264) 32 33
+    ADD (265) 11
+    SUB (266) 12
+    ADDI (267) 17
+    LW (268) 19
+    SLLI (269) 18
+    SW (270) 22
+    BEQ (271) 28
+    J (272) 31
+    AUIPC (273) 25
+
+
+Nonterminals, with rules where they appear
+
+    $accept (19)
+        on left: 0
+    program (20)
+        on left: 1
+        on right: 0
+    segments (21)
+        on left: 2 3
+        on right: 1 2
+    segment (22)
+        on left: 4 5
+        on right: 2 3
+    text (23)
+        on left: 6 7
+        on right: 5 6
+    instruction (24)
+        on left: 8 13 20 23 26 29
+        on right: 6 7
+    r-type (25)
+        on left: 9 10
+        on right: 8
+    add (26)
+        on left: 11
+        on right: 9
+    sub (27)
+        on left: 12
+        on right: 10
+    i-type (28)
+        on left: 14 15 16
+        on right: 13
+    addi (29)
+        on left: 17
+        on right: 14
+    slli (30)
+        on left: 18
+        on right: 15
+    lw (31)
+        on left: 19
+        on right: 16
+    s-type (32)
+        on left: 21
+        on right: 20
+    sw (33)
+        on left: 22
+        on right: 21
+    ui-type (34)
+        on left: 24
+        on right: 23
+    auipc (35)
+        on left: 25
+        on right: 24
+    b-type (36)
+        on left: 27
+        on right: 26
+    beq (37)
+        on left: 28
+        on right: 27
+    j-type (38)
+        on left: 30
+        on right: 29
+    j (39)
+        on left: 31
+        on right: 30
+    imm <l> (40)
+        on left: 32 33
+        on right: 17 18 19 22 25 28 31
+
+
+State 0
+
+    0 $accept: • program $end
+
+    ADD    shift, and go to state 1
+    SUB    shift, and go to state 2
+    ADDI   shift, and go to state 3
+    LW     shift, and go to state 4
+    SLLI   shift, and go to state 5
+    SW     shift, and go to state 6
+    BEQ    shift, and go to state 7
+    J      shift, and go to state 8
+    AUIPC  shift, and go to state 9
+
+    ADD       [reduce using rule 4 (segment)]
+    SUB       [reduce using rule 4 (segment)]
+    ADDI      [reduce using rule 4 (segment)]
+    LW        [reduce using rule 4 (segment)]
+    SLLI      [reduce using rule 4 (segment)]
+    SW        [reduce using rule 4 (segment)]
+    BEQ       [reduce using rule 4 (segment)]
+    J         [reduce using rule 4 (segment)]
+    AUIPC     [reduce using rule 4 (segment)]
+    $default  reduce using rule 4 (segment)
+
+    program      go to state 10
+    segments     go to state 11
+    segment      go to state 12
+    text         go to state 13
+    instruction  go to state 14
+    r-type       go to state 15
+    add          go to state 16
+    sub          go to state 17
+    i-type       go to state 18
+    addi         go to state 19
+    slli         go to state 20
+    lw           go to state 21
+    s-type       go to state 22
+    sw           go to state 23
+    ui-type      go to state 24
+    auipc        go to state 25
+    b-type       go to state 26
+    beq          go to state 27
+    j-type       go to state 28
+    j            go to state 29
+
+
+State 1
+
+   11 add: ADD • REGISTER COMMA REGISTER COMMA REGISTER
+
+    REGISTER  shift, and go to state 30
+
+
+State 2
+
+   12 sub: SUB • REGISTER COMMA REGISTER COMMA REGISTER
+
+    REGISTER  shift, and go to state 31
+
+
+State 3
+
+   17 addi: ADDI • REGISTER COMMA REGISTER COMMA imm
+
+    REGISTER  shift, and go to state 32
+
+
+State 4
+
+   19 lw: LW • REGISTER COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+    REGISTER  shift, and go to state 33
+
+
+State 5
+
+   18 slli: SLLI • REGISTER COMMA REGISTER COMMA imm
+
+    REGISTER  shift, and go to state 34
+
+
+State 6
+
+   22 sw: SW • REGISTER COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+    REGISTER  shift, and go to state 35
+
+
+State 7
+
+   28 beq: BEQ • REGISTER COMMA REGISTER COMMA imm
+
+    REGISTER  shift, and go to state 36
+
+
+State 8
+
+   31 j: J • imm
+
+    MINUS      shift, and go to state 37
+    IMMEDIATE  shift, and go to state 38
+
+    imm  go to state 39
+
+
+State 9
+
+   25 auipc: AUIPC • REGISTER COMMA imm
+
+    REGISTER  shift, and go to state 40
+
+
+State 10
+
+    0 $accept: program • $end
+
+    $end  shift, and go to state 41
+
+
+State 11
+
+    1 program: segments •
+    2 segments: segments • segment
+
+    ADD    shift, and go to state 1
+    SUB    shift, and go to state 2
+    ADDI   shift, and go to state 3
+    LW     shift, and go to state 4
+    SLLI   shift, and go to state 5
+    SW     shift, and go to state 6
+    BEQ    shift, and go to state 7
+    J      shift, and go to state 8
+    AUIPC  shift, and go to state 9
+
+    $end      reduce using rule 1 (program)
+    $end      [reduce using rule 4 (segment)]
+    ADD       [reduce using rule 4 (segment)]
+    SUB       [reduce using rule 4 (segment)]
+    ADDI      [reduce using rule 4 (segment)]
+    LW        [reduce using rule 4 (segment)]
+    SLLI      [reduce using rule 4 (segment)]
+    SW        [reduce using rule 4 (segment)]
+    BEQ       [reduce using rule 4 (segment)]
+    J         [reduce using rule 4 (segment)]
+    AUIPC     [reduce using rule 4 (segment)]
+    $default  reduce using rule 1 (program)
+
+    segment      go to state 42
+    text         go to state 13
+    instruction  go to state 14
+    r-type       go to state 15
+    add          go to state 16
+    sub          go to state 17
+    i-type       go to state 18
+    addi         go to state 19
+    slli         go to state 20
+    lw           go to state 21
+    s-type       go to state 22
+    sw           go to state 23
+    ui-type      go to state 24
+    auipc        go to state 25
+    b-type       go to state 26
+    beq          go to state 27
+    j-type       go to state 28
+    j            go to state 29
+
+
+State 12
+
+    3 segments: segment •
+
+    $default  reduce using rule 3 (segments)
+
+
+State 13
+
+    5 segment: text •
+    6 text: text • NEWLINE instruction
+
+    NEWLINE  shift, and go to state 43
+
+    $default  reduce using rule 5 (segment)
+
+
+State 14
+
+    7 text: instruction •
+
+    $default  reduce using rule 7 (text)
+
+
+State 15
+
+    8 instruction: r-type •
+
+    $default  reduce using rule 8 (instruction)
+
+
+State 16
+
+    9 r-type: add •
+
+    $default  reduce using rule 9 (r-type)
+
+
+State 17
+
+   10 r-type: sub •
+
+    $default  reduce using rule 10 (r-type)
+
+
+State 18
+
+   13 instruction: i-type •
+
+    $default  reduce using rule 13 (instruction)
+
+
+State 19
+
+   14 i-type: addi •
+
+    $default  reduce using rule 14 (i-type)
+
+
+State 20
+
+   15 i-type: slli •
+
+    $default  reduce using rule 15 (i-type)
+
+
+State 21
+
+   16 i-type: lw •
+
+    $default  reduce using rule 16 (i-type)
+
+
+State 22
+
+   20 instruction: s-type •
+
+    $default  reduce using rule 20 (instruction)
+
+
+State 23
+
+   21 s-type: sw •
+
+    $default  reduce using rule 21 (s-type)
+
+
+State 24
+
+   23 instruction: ui-type •
+
+    $default  reduce using rule 23 (instruction)
+
+
+State 25
+
+   24 ui-type: auipc •
+
+    $default  reduce using rule 24 (ui-type)
+
+
+State 26
+
+   26 instruction: b-type •
+
+    $default  reduce using rule 26 (instruction)
+
+
+State 27
+
+   27 b-type: beq •
+
+    $default  reduce using rule 27 (b-type)
+
+
+State 28
+
+   29 instruction: j-type •
+
+    $default  reduce using rule 29 (instruction)
+
+
+State 29
+
+   30 j-type: j •
+
+    $default  reduce using rule 30 (j-type)
+
+
+State 30
+
+   11 add: ADD REGISTER • COMMA REGISTER COMMA REGISTER
+
+    COMMA  shift, and go to state 44
+
+
+State 31
+
+   12 sub: SUB REGISTER • COMMA REGISTER COMMA REGISTER
+
+    COMMA  shift, and go to state 45
+
+
+State 32
+
+   17 addi: ADDI REGISTER • COMMA REGISTER COMMA imm
+
+    COMMA  shift, and go to state 46
+
+
+State 33
+
+   19 lw: LW REGISTER • COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+    COMMA  shift, and go to state 47
+
+
+State 34
+
+   18 slli: SLLI REGISTER • COMMA REGISTER COMMA imm
+
+    COMMA  shift, and go to state 48
+
+
+State 35
+
+   22 sw: SW REGISTER • COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+    COMMA  shift, and go to state 49
+
+
+State 36
+
+   28 beq: BEQ REGISTER • COMMA REGISTER COMMA imm
+
+    COMMA  shift, and go to state 50
+
+
+State 37
+
+   32 imm: MINUS • IMMEDIATE
+
+    IMMEDIATE  shift, and go to state 51
+
+
+State 38
+
+   33 imm: IMMEDIATE •
+
+    $default  reduce using rule 33 (imm)
+
+
+State 39
+
+   31 j: J imm •
+
+    $default  reduce using rule 31 (j)
+
+
+State 40
+
+   25 auipc: AUIPC REGISTER • COMMA imm
+
+    COMMA  shift, and go to state 52
+
+
+State 41
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 42
+
+    2 segments: segments segment •
+
+    $default  reduce using rule 2 (segments)
+
+
+State 43
+
+    6 text: text NEWLINE • instruction
+
+    ADD    shift, and go to state 1
+    SUB    shift, and go to state 2
+    ADDI   shift, and go to state 3
+    LW     shift, and go to state 4
+    SLLI   shift, and go to state 5
+    SW     shift, and go to state 6
+    BEQ    shift, and go to state 7
+    J      shift, and go to state 8
+    AUIPC  shift, and go to state 9
+
+    instruction  go to state 53
+    r-type       go to state 15
+    add          go to state 16
+    sub          go to state 17
+    i-type       go to state 18
+    addi         go to state 19
+    slli         go to state 20
+    lw           go to state 21
+    s-type       go to state 22
+    sw           go to state 23
+    ui-type      go to state 24
+    auipc        go to state 25
+    b-type       go to state 26
+    beq          go to state 27
+    j-type       go to state 28
+    j            go to state 29
+
+
+State 44
+
+   11 add: ADD REGISTER COMMA • REGISTER COMMA REGISTER
+
+    REGISTER  shift, and go to state 54
+
+
+State 45
+
+   12 sub: SUB REGISTER COMMA • REGISTER COMMA REGISTER
+
+    REGISTER  shift, and go to state 55
+
+
+State 46
+
+   17 addi: ADDI REGISTER COMMA • REGISTER COMMA imm
+
+    REGISTER  shift, and go to state 56
+
+
+State 47
+
+   19 lw: LW REGISTER COMMA • imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+    MINUS      shift, and go to state 37
+    IMMEDIATE  shift, and go to state 38
+
+    imm  go to state 57
+
+
+State 48
+
+   18 slli: SLLI REGISTER COMMA • REGISTER COMMA imm
+
+    REGISTER  shift, and go to state 58
+
+
+State 49
+
+   22 sw: SW REGISTER COMMA • imm LEFT_PAREN REGISTER RIGHT_PAREN
+
+    MINUS      shift, and go to state 37
+    IMMEDIATE  shift, and go to state 38
+
+    imm  go to state 59
+
+
+State 50
+
+   28 beq: BEQ REGISTER COMMA • REGISTER COMMA imm
+
+    REGISTER  shift, and go to state 60
+
+
+State 51
+
+   32 imm: MINUS IMMEDIATE •
+
+    $default  reduce using rule 32 (imm)
+
+
+State 52
+
+   25 auipc: AUIPC REGISTER COMMA • imm
+
+    MINUS      shift, and go to state 37
+    IMMEDIATE  shift, and go to state 38
+
+    imm  go to state 61
+
+
+State 53
+
+    6 text: text NEWLINE instruction •
+
+    $default  reduce using rule 6 (text)
+
+
+State 54
+
+   11 add: ADD REGISTER COMMA REGISTER • COMMA REGISTER
+
+    COMMA  shift, and go to state 62
+
+
+State 55
+
+   12 sub: SUB REGISTER COMMA REGISTER • COMMA REGISTER
+
+    COMMA  shift, and go to state 63
+
+
+State 56
+
+   17 addi: ADDI REGISTER COMMA REGISTER • COMMA imm
+
+    COMMA  shift, and go to state 64
+
+
+State 57
+
+   19 lw: LW REGISTER COMMA imm • LEFT_PAREN REGISTER RIGHT_PAREN
+
+    LEFT_PAREN  shift, and go to state 65
+
+
+State 58
+
+   18 slli: SLLI REGISTER COMMA REGISTER • COMMA imm
+
+    COMMA  shift, and go to state 66
+
+
+State 59
+
+   22 sw: SW REGISTER COMMA imm • LEFT_PAREN REGISTER RIGHT_PAREN
+
+    LEFT_PAREN  shift, and go to state 67
+
+
+State 60
+
+   28 beq: BEQ REGISTER COMMA REGISTER • COMMA imm
+
+    COMMA  shift, and go to state 68
+
+
+State 61
+
+   25 auipc: AUIPC REGISTER COMMA imm •
+
+    $default  reduce using rule 25 (auipc)
+
+
+State 62
+
+   11 add: ADD REGISTER COMMA REGISTER COMMA • REGISTER
+
+    REGISTER  shift, and go to state 69
+
+
+State 63
+
+   12 sub: SUB REGISTER COMMA REGISTER COMMA • REGISTER
+
+    REGISTER  shift, and go to state 70
+
+
+State 64
+
+   17 addi: ADDI REGISTER COMMA REGISTER COMMA • imm
+
+    MINUS      shift, and go to state 37
+    IMMEDIATE  shift, and go to state 38
+
+    imm  go to state 71
+
+
+State 65
+
+   19 lw: LW REGISTER COMMA imm LEFT_PAREN • REGISTER RIGHT_PAREN
+
+    REGISTER  shift, and go to state 72
+
+
+State 66
+
+   18 slli: SLLI REGISTER COMMA REGISTER COMMA • imm
+
+    MINUS      shift, and go to state 37
+    IMMEDIATE  shift, and go to state 38
+
+    imm  go to state 73
+
+
+State 67
+
+   22 sw: SW REGISTER COMMA imm LEFT_PAREN • REGISTER RIGHT_PAREN
+
+    REGISTER  shift, and go to state 74
+
+
+State 68
+
+   28 beq: BEQ REGISTER COMMA REGISTER COMMA • imm
+
+    MINUS      shift, and go to state 37
+    IMMEDIATE  shift, and go to state 38
+
+    imm  go to state 75
+
+
+State 69
+
+   11 add: ADD REGISTER COMMA REGISTER COMMA REGISTER •
+
+    $default  reduce using rule 11 (add)
+
+
+State 70
+
+   12 sub: SUB REGISTER COMMA REGISTER COMMA REGISTER •
+
+    $default  reduce using rule 12 (sub)
+
+
+State 71
+
+   17 addi: ADDI REGISTER COMMA REGISTER COMMA imm •
+
+    $default  reduce using rule 17 (addi)
+
+
+State 72
+
+   19 lw: LW REGISTER COMMA imm LEFT_PAREN REGISTER • RIGHT_PAREN
+
+    RIGHT_PAREN  shift, and go to state 76
+
+
+State 73
+
+   18 slli: SLLI REGISTER COMMA REGISTER COMMA imm •
+
+    $default  reduce using rule 18 (slli)
+
+
+State 74
+
+   22 sw: SW REGISTER COMMA imm LEFT_PAREN REGISTER • RIGHT_PAREN
+
+    RIGHT_PAREN  shift, and go to state 77
+
+
+State 75
+
+   28 beq: BEQ REGISTER COMMA REGISTER COMMA imm •
+
+    $default  reduce using rule 28 (beq)
+
+
+State 76
+
+   19 lw: LW REGISTER COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN •
+
+    $default  reduce using rule 19 (lw)
+
+
+State 77
+
+   22 sw: SW REGISTER COMMA imm LEFT_PAREN REGISTER RIGHT_PAREN •
+
+    $default  reduce using rule 22 (sw)
